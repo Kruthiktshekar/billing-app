@@ -1,0 +1,24 @@
+Type: AWS::DynamoDB::Table
+Properties:
+  TableName: BillingTable
+  AttributeDefinitions:
+    - AttributeName: billingId
+      AttributeType: S
+    - AttributeName: isDeleted
+      AttributeType: S
+  KeySchema:
+    - AttributeName: billingId
+      KeyType: HASH
+  GlobalSecondaryIndexes:
+    - IndexName: isDeletedIndex
+      KeySchema:
+        - AttributeName: isDeleted
+          KeyType: HASH
+      Projection:
+        ProjectionType: ALL
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  ProvisionedThroughput:
+    ReadCapacityUnits: 5
+    WriteCapacityUnits: 5

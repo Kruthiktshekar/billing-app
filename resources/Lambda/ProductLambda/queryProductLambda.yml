@@ -1,0 +1,8 @@
+name: getAllProduct
+handler: src/Product/queryProductLambda.handler
+role: UserRole
+events:
+  - http:
+      path: products
+      method: get
+      cors: true

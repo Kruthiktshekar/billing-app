@@ -1,0 +1,70 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: kruthiktshekar
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: billing-app
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  architecture: x86_64
+  stage: dev
+
+functions:
+  # Billing lambda
+  createBill: ${file(./resources/Lambda/BillingLambda/createBillLambda.yml)}
+  deleteBill: ${file(./resources/Lambda/BillingLambda/deleteBillLambda.yml)}
+  getBill: ${file(./resources/Lambda/BillingLambda/getBillLambda.yml)}
+  queryBill: ${file(./resources/Lambda/BillingLambda/queryBillLambda.yml)}
+
+  # Product lambda
+  createProduct: ${file(./resources/Lambda/ProductLambda/createProductLambda.yml)}
+  getProduct: ${file(./resources/Lambda/ProductLambda/getProductLambda.yml)}
+  updateProduct: ${file(./resources/Lambda/ProductLambda/updateProductLambda.yml)}
+  deleteProduct: ${file(./resources/Lambda/ProductLambda/deleteProductLambda.yml)}
+  queryProduct: ${file(./resources/Lambda/ProductLambda/queryProductLambda.yml)}
+
+resources:
+  Resources:
+    ProductTable: ${file(./resources/DynamoDB/ProductTable.yml)}
+    BillingTable: ${file(./resources/DynamoDB/BillingTable.yml)}
+    UserRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: UserDbRole
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service:
+                  - "lambda.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Policies:
+          - PolicyName: ProductsDbPolicy
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: "Allow"
+                  Action:
+                    - "dynamodb:PutItem"
+                    - "dynamodb:GetItem"
+                    - "dynamodb:UpdateItem"
+                    - "dynamodb:DeleteItem"
+                    - "dynamodb:Scan"
+                    - "dynamodb:Query"
+                  Resource:
+                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/ProductTable"
+                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/ProductTable/*"
+                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/BillingTable"
+                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/BillingTable/*"
+          - PolicyName: LogPolicy
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: "Allow"
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: "*"

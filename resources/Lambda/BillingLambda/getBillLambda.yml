@@ -1,0 +1,8 @@
+name: getBill
+handler: src/Billing/getBillLambda.handler
+role: UserRole
+events:
+  - http:
+      path: bill
+      method: get
+      cors: true

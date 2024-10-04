@@ -1,0 +1,8 @@
+name: deleteProduct
+handler: src/Product/deleteProductLambda.handler
+role: UserRole
+events:
+  - http:
+      path: product
+      method: delete
+      cors: true

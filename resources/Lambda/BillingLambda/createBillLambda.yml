@@ -1,0 +1,8 @@
+name: createBill
+handler: src/Billing/createBillLambda.handler
+role: UserRole
+events:
+  - http:
+      path: bill
+      method: post
+      cors: true
