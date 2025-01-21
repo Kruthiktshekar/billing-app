@@ -1,4 +1,4 @@
 node_modules/
+eslint.config.mjs/
 __test__/
 coverage/
-eslint.config.mjs/
