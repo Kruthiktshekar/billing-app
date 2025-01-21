@@ -1,0 +1,4 @@
+# package directories
+node_modules/
+billing-app/node_modules/
+coverage
