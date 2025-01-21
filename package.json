@@ -12,11 +12,5 @@
   },
   "devDependencies": {
     "husky": "^9.1.7"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }
