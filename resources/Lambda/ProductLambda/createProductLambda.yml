@@ -1,0 +1,8 @@
+name: createProduct
+handler: src/Product/createProductLambda.handler
+role: UserRole
+events:
+  - http:
+      path: product
+      method: post
+      cors: true

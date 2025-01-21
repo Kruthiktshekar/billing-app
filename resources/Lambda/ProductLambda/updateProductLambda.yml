@@ -1,0 +1,8 @@
+name: updateProduct
+handler: src/Product/updateProductLambda.handler
+role: UserRole
+events:
+  - http:
+      path: product
+      method: put
+      cors: true

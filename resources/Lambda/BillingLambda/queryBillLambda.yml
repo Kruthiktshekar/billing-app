@@ -1,0 +1,8 @@
+name: getAllBill
+handler: src/Billing/queryBillLambda.handler
+role: UserRole
+events:
+  - http:
+      path: bills
+      method: get
+      cors: true
