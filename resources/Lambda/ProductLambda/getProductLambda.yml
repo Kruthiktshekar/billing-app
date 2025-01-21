@@ -1,8 +1,0 @@
-name: getProduct
-handler: src/Product/getProductLambda.handler
-role: UserRole
-events:
-  - http:
-      path: product
-      method: get
-      cors: true

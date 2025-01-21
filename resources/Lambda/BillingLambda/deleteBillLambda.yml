@@ -1,8 +1,0 @@
-name: deleteBill
-handler: src/Billing/deleteBillLambda.handler
-role: UserRole
-events:
-  - http:
-      path: bill
-      method: delete
-      cors: true
