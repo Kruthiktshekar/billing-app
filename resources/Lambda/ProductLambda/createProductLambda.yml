@@ -5,4 +5,4 @@ events:
   - http:
       path: product
       method: post
-      cors: true     
+      cors: true

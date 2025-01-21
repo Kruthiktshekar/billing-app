@@ -32,39 +32,39 @@ resources:
       Properties:
         RoleName: UserDbRole
         AssumeRolePolicyDocument:
-          Version: "2012-10-17"
+          Version: '2012-10-17'
           Statement:
-            - Effect: "Allow"
+            - Effect: 'Allow'
               Principal:
                 Service:
-                  - "lambda.amazonaws.com"
+                  - 'lambda.amazonaws.com'
               Action:
-                - "sts:AssumeRole"
+                - 'sts:AssumeRole'
         Policies:
           - PolicyName: ProductsDbPolicy
             PolicyDocument:
-              Version: "2012-10-17"
+              Version: '2012-10-17'
               Statement:
-                - Effect: "Allow"
+                - Effect: 'Allow'
                   Action:
-                    - "dynamodb:PutItem"
-                    - "dynamodb:GetItem"
-                    - "dynamodb:UpdateItem"
-                    - "dynamodb:DeleteItem"
-                    - "dynamodb:Scan"
-                    - "dynamodb:Query"
+                    - 'dynamodb:PutItem'
+                    - 'dynamodb:GetItem'
+                    - 'dynamodb:UpdateItem'
+                    - 'dynamodb:DeleteItem'
+                    - 'dynamodb:Scan'
+                    - 'dynamodb:Query'
                   Resource:
-                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/ProductTable"
-                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/ProductTable/*"
-                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/BillingTable"
-                    - !Sub "arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/BillingTable/*"
+                    - !Sub 'arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/ProductTable'
+                    - !Sub 'arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/ProductTable/*'
+                    - !Sub 'arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/BillingTable'
+                    - !Sub 'arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/BillingTable/*'
           - PolicyName: LogPolicy
             PolicyDocument:
-              Version: "2012-10-17"
+              Version: '2012-10-17'
               Statement:
-                - Effect: "Allow"
+                - Effect: 'Allow'
                   Action:
                     - logs:CreateLogGroup
                     - logs:CreateLogStream
                     - logs:PutLogEvents
-                  Resource: "*"
+                  Resource: '*'
